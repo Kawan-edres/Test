@@ -1,19 +1,35 @@
-import React, { useEffect, useRef, useState } from 'react'
 import { Html} from "@react-three/drei";
 import * as THREE from "three";
 import {ReactComponent as Mark} from '../Assets/mark.svg';
-import { useLoader } from "@react-three/fiber";
+import { useSpring, animated } from '@react-spring/three'
+import { useEffect, useState } from "react";
 
 
 
 
 
 
-const Dome = ({ name,color, position, texture, onClick,which,setWhich,modal,setModal }) => {
-  console.log(modal);
+const Dome = ({ name,color, texture, onClick,which,setWhich,modal,setModal,pos,sort,col }) => {
+
+
+  
+  
+  const { position } = useSpring({
+    to: {
+      position: 0,
+    },
+    from: { position: -100},
+    config: { mass: 5, tension: 500, friction: 150 },
+  })
+ 
+ 
+
+
+
+
 
   const handleClick=()=>{
-    if(which===0 && name === "outside"){
+    if(which===0 && name === "outside" && sort===0){
       setWhich(1);
 
     }
@@ -32,12 +48,12 @@ const Dome = ({ name,color, position, texture, onClick,which,setWhich,modal,setM
   }
     return (
         <group>
-          <mesh  >
-            <sphereBufferGeometry args={[500, 60, 40]} />
-            <meshBasicMaterial map={texture} side={THREE.BackSide} />
-          </mesh>
+          < animated.mesh   position={position} >
+            <sphereBufferGeometry attach="geometry" args={[500, 60, 40]} />
+            <meshBasicMaterial attach="material" map={texture} side={THREE.BackSide} />
+          </animated.mesh>
 
-          <mesh  position={position}>
+          <mesh position={[-20, 0, 10]}>
             <sphereGeometry args={[1.25, 32, 32]} />
             <meshBasicMaterial color={color} />
             <Html center>
@@ -49,13 +65,15 @@ const Dome = ({ name,color, position, texture, onClick,which,setWhich,modal,setM
             </Html>
           </mesh>
 
-          <mesh   position={[20, 0, 20]}>
-            <sphereGeometry args={[1.25, 32, 32]} />
-            <meshBasicMaterial color={color} />
+
+          <mesh   position={pos}>
+            <sphereGeometry args={[2, 32, 32]} />
+            <meshBasicMaterial color={color} transparent opacity={0} />
             <Html center>
 
-                <p onClick={()=>setModal(true)}  className="spot">
-                  {<Mark />}
+                <p onClick={()=>{setModal(true); }}  className="spot">
+                
+                  { !modal &&<Mark className="mark" />}
                 </p>
              
             </Html>

@@ -1,11 +1,35 @@
-import React from 'react'
-import ImageSlider from './Components/ImageSlider';
-import { SliderData } from './Components/SliderImageData';
+import "./index.css";
+import { Canvas } from "@react-three/fiber";
+import { useLoader } from "@react-three/fiber";
+import {
+  Environment,
+  OrbitControls,
+  Html,
+  useProgress
+} from "@react-three/drei";
+import { GLTFLoader } from "three/examples/jsm/loaders/GLTFLoader";
+import { Suspense } from "react";
 
-
-const Ap = () => {
-  return <ImageSlider slides={SliderData} />;
-
+function Loader() {
+  const { active, progress, errors, item, loaded, total } = useProgress();
+  return <Html center>{progress} % loaded</Html>;
 }
 
-export default Ap
+const Model = () => {
+  const gltf = useLoader(GLTFLoader, "./indexx.gltf");
+  return <primitive object={gltf.scene} scale={0.4} />;
+};
+
+export default function App() {
+  return (
+    <div className="App">
+      <Canvas>
+        <Suspense fallback={<Loader />}>
+          <Model />
+          <OrbitControls />
+          <Environment preset="sunset" background />
+        </Suspense>
+      </Canvas>
+    </div>
+  );
+}

@@ -19,12 +19,16 @@ body,
   overflow: hidden;
 }
 
+button{
+  cursor: pointer;
+}
+
 /* slider */
 
 
 .slider {
   position: relative;
-  height: 25vh;
+  /* height: 25vh; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -96,13 +100,26 @@ body {
 }
 
 .spot{
-
   cursor: pointer;
-  font-size: 1rem;
   font-weight: bold;
+  height: 100px;
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: all 0.1s ease-in-out;
   
-    
-   
+}
+.spot:hover{
+  transform: scale(1.3);
+  color: white;
+
+}
+.mark{
+  color: white;
+  font-size: 1.5rem;
+  fill: white;
 }
 .rotate-p{
   font-size: 1rem;
@@ -131,6 +148,9 @@ body {
 .modal-content{
   position: fixed;
   top: 20vh;
+  display: flex;
+  justify-content: space-between  ;
+
   /* left: 5%; */
   width: 80%;
   background-color: white;
@@ -143,6 +163,28 @@ body {
   animation: slide-down 1s ease-out forwards;
   
 
+}
+.infos{
+  max-width: 350px;
+  /* background-color: #4158D0; */
+}
+.right-arrow {
+    
+  top: 70%;
+  right: 15%;
+  font-size: 3rem;
+  color: white;
+  
+}
+
+.left-arrow {
+ 
+  top: 70%;
+  left: 15%;
+  font-size: 3rem;
+  color: white;
+
+ 
 }
 .music-modal-content{
   position: fixed;
@@ -166,6 +208,23 @@ body {
 .modal-p{
   font-size: 1rem;
   margin-bottom: 1rem;
+}
+
+
+.logo360{
+  width: 500px;
+  height: 500px;
+  background-color:white ;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+.img360{
+  width: 100%;
+  height: 50%;
+  z-index: 100;
 }
 
 /* Sound */
@@ -221,10 +280,39 @@ background-image: linear-gradient(45deg, #85FFBD 0%, #FFFB7D 100%);
 
 @media (min-width: 768px) {
   .modal-content,.music-modal-content{
-    width: 40rem;
-    left: calc(50% - 20rem);
+    width: 40rem; 
     
   }
+
+ 
+}
+@media (max-width: 768px) {
+
+  .modal-content{
+    top: 10vh;
+    display: flex;
+    gap:1rem ;
+    flex-direction: column;
+    margin: 0 auto;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    
+    
+  } 
+  .info{
+    width: 100%;
+    max-width: 100%;
+  }
+  .right-arrow,.left-arrow {
+    font-size: 2rem;
+    
+  }
+  
+ 
+ 
+
+  
 }
 
 @keyframes slide-down {

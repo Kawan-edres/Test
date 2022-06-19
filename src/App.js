@@ -2,44 +2,62 @@ import * as THREE from "three";
 import React, { Suspense, useState } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
 import {Preload,Environment,Html,useProgress, OrbitControls } from "@react-three/drei";
-import "antd/dist/antd.css";
 import Modal from "./Components/Modal";
 import Dome from "./Components/Dome";
 import Sound from './Components/Sound'
+import StartUpModal from "./Components/StartUpModal";
 
 
-
-const store = [
+const Directionstore = [
   {
     name: "outside",
     color: "lightpink",
     position: [20, -5, -3],
-    url: "/indexx.jpg",
+    url: "/room.jpeg",
     link: 0,
   },
   {
     name: "snow",
     color: "lightblue",
     position: [10, 0, -3],
-    url: "/index.jpg",
+    url: "/bed.jpeg",
     link: 1,
   },
   {
     name: "Top",
     color: "hotpink",
     position: [0, 0, 10],
-    url: "/snow.jpg",
+    url: "/nature.jpeg",
     link: 2,
   },
  
 ];
 
+const infoStore = [
+  {
+    pos: [20, 0, 20],
+    sort: 0,
+    col: "yellow",
+  },
+  {
+    pos: [10, 0, -3],
+    sort: 2,
+    col: "red",
+  },
+  {
+    pos: [20, 0, -3],
+    sort: 3,
+    col: "green",
+  },
+]
+
 
 
 function Portals({modal,setModal}) {
   const [which, setWhich] = useState(0);
-  const { link, ...props } = store[which];
-  const maps = useLoader(THREE.TextureLoader, store.map((entry) => entry.url)) //maps is an array of textures
+  const { link, ...props } = Directionstore[which];
+  const { sort,pos,col } = infoStore[which];
+  const maps = useLoader(THREE.TextureLoader, Directionstore.map((entry) => entry.url)) //maps is an array of textures
 
 
   return (
@@ -51,6 +69,9 @@ function Portals({modal,setModal}) {
       setWhich={setWhich}
       {...props}
       texture={maps[which]}
+      sort={sort}
+      pos={pos}
+      // col={col}
     />
   );
 }
@@ -58,6 +79,7 @@ function Portals({modal,setModal}) {
 function App() {
   const [modal, setModal] = useState(false);
   const [rotate, setRotate] = useState(true);
+  const [startUp, setStartUp] = useState(false);
   const handleRotate = () => {
     setRotate(!rotate);
   }
@@ -67,11 +89,12 @@ function App() {
 
   return (
     <div onDoubleClick={handleRotate} className="container">
+    {/* { !startUp &&<StartUpModal startUp={startUp} setStartUp={setStartUp} />} */}
     {modal &&  <Modal setModal={setModal} modal={modal} /> }
 
-    <Sound/>
+   <Sound/>
      
-      <Canvas  frameloop="demand" camera={{ position: [0, 0, 0.1] }}>
+      <Canvas  frameloop="demand" camera={{ fov: 90,position: [0, 0, 0.1] }}>
        
         <Suspense fallback={null}>
           <Preload all />
