@@ -1,9 +1,12 @@
 import { Fragment } from "react";
+import React from "react";
 import ReactDom from "react-dom";
 import ImageSlider from "./ImageSlider";
 import { SliderData } from "./SliderImageData";
 
 const Modal = ({ setModal }) => {
+
+  console.log("modal");
   return ReactDom.createPortal(
     <Fragment>
       <div onClick={() => setModal(false)} className="modal">
@@ -28,4 +31,4 @@ const Modal = ({ setModal }) => {
   );
 };
 
-export default Modal;
+export default React.memo(Modal);

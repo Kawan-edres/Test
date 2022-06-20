@@ -3,6 +3,8 @@ import ReactDom from 'react-dom'
 
 
 const MusicModal = ({playing,setPlaying,setModalHider}) => {
+
+    console.log("music modal");
     const play=()=>{
         setPlaying(true);
         setModalHider(false)

@@ -1,11 +1,10 @@
 import * as THREE from "three";
 import React, { Suspense, useState } from "react";
 import { Canvas, useLoader } from "@react-three/fiber";
-import {Preload,Environment,Html,useProgress, OrbitControls } from "@react-three/drei";
+import {Preload, OrbitControls } from "@react-three/drei";
 import Modal from "./Components/Modal";
 import Dome from "./Components/Dome";
 import Sound from './Components/Sound'
-import StartUpModal from "./Components/StartUpModal";
 
 
 const Directionstore = [
@@ -37,17 +36,14 @@ const infoStore = [
   {
     pos: [20, 0, 20],
     sort: 0,
-    col: "yellow",
   },
   {
     pos: [10, 0, -3],
     sort: 2,
-    col: "red",
   },
   {
     pos: [20, 0, -3],
     sort: 3,
-    col: "green",
   },
 ]
 
@@ -56,7 +52,7 @@ const infoStore = [
 function Portals({modal,setModal}) {
   const [which, setWhich] = useState(0);
   const { link, ...props } = Directionstore[which];
-  const { sort,pos,col } = infoStore[which];
+  const { sort,pos} = infoStore[which];
   const maps = useLoader(THREE.TextureLoader, Directionstore.map((entry) => entry.url)) //maps is an array of textures
 
 
@@ -80,6 +76,7 @@ function App() {
   const [modal, setModal] = useState(false);
   const [rotate, setRotate] = useState(true);
   const [startUp, setStartUp] = useState(false);
+  console.log("APP");
   const handleRotate = () => {
     setRotate(!rotate);
   }
@@ -92,7 +89,7 @@ function App() {
     {/* { !startUp &&<StartUpModal startUp={startUp} setStartUp={setStartUp} />} */}
     {modal &&  <Modal setModal={setModal} modal={modal} /> }
 
-   <Sound/>
+   <Sound />
      
       <Canvas  frameloop="demand" camera={{ fov: 90,position: [0, 0, 0.1] }}>
        

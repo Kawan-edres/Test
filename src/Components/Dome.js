@@ -2,7 +2,6 @@ import { Html} from "@react-three/drei";
 import * as THREE from "three";
 import {ReactComponent as Mark} from '../Assets/mark.svg';
 import { useSpring, animated } from '@react-spring/three'
-import { useEffect, useState } from "react";
 
 
 
@@ -12,7 +11,7 @@ import { useEffect, useState } from "react";
 const Dome = ({ name,color, texture, onClick,which,setWhich,modal,setModal,pos,sort,col }) => {
 
 
-  
+  console.log("Demo ");
   
   const { position } = useSpring({
     to: {

@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import S from '../Sounds/N.mp3'
 import MusicModal from "./MusicModal";
 
-const useAudio = url => {
+const useAudio = () => {
+
+  
   const [audio] = useState(new Audio(S));
   const [playing, setPlaying] = useState(false);
 
@@ -14,17 +16,19 @@ const useAudio = url => {
     [playing]
   );
 
-  useEffect(() => {
-    audio.addEventListener('ended', () => setPlaying(false));
-    return () => {
-      audio.removeEventListener('ended', () => setPlaying(false));
-    };
-  }, []);
+  // useEffect(() => {
+  //   audio.addEventListener('ended', () => setPlaying(false));
+  //   return () => {
+  //     audio.removeEventListener('ended', () => setPlaying(false));
+  //   };
+  // }, []);
 
   return [playing, toggle,setPlaying];
 };
 
-const Player = ({ url }) => {
+const Player =  ({ url }) => {
+
+  console.log("sound");
   const [playing, toggle,setPlaying] = useAudio(url);
   const [modalHider,setModalHider]=useState(true);
   console.log("modalHider :"+modalHider);
@@ -40,4 +44,4 @@ const Player = ({ url }) => {
   );
 };
 
-export default Player;
+export default React.memo(Player);
