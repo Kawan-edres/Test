@@ -24,7 +24,7 @@ const MusicModal = ({playing,setPlaying,setModalHider}) => {
           <button onClick={play} className='music-btn'>Yes</button>
           <button onClick={pause} className='music-btn'>No</button>
           </div>
-          <p className='rotate-p'>try double click to stop and startclear
+          <p className='rotate-p'>try double click to stop and start
            rotation</p>
 
           </div>
