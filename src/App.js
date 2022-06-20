@@ -5,6 +5,7 @@ import {Preload, OrbitControls } from "@react-three/drei";
 import Modal from "./Components/Modal";
 import Dome from "./Components/Dome";
 import Sound from './Components/Sound'
+import { useCallback } from "react";
 
 
 const Directionstore = [
@@ -12,21 +13,21 @@ const Directionstore = [
     name: "outside",
     color: "lightpink",
     position: [20, -5, -3],
-    url: "/room.jpeg",
+    url: "/room.webp",
     link: 0,
   },
   {
     name: "snow",
     color: "lightblue",
     position: [10, 0, -3],
-    url: "/bed.jpeg",
+    url: "/bed.webp",
     link: 1,
   },
   {
     name: "Top",
     color: "hotpink",
     position: [0, 0, 10],
-    url: "/nature.jpeg",
+    url: "/nature.webp",
     link: 2,
   },
  
@@ -49,7 +50,7 @@ const infoStore = [
 
 
 
-function Portals({modal,setModal}) {
+const Portals=({modal,setModal})=> {
   const [which, setWhich] = useState(0);
   const { link, ...props } = Directionstore[which];
   const { sort,pos} = infoStore[which];
@@ -77,9 +78,10 @@ function App() {
   const [rotate, setRotate] = useState(true);
   const [startUp, setStartUp] = useState(false);
   console.log("APP");
-  const handleRotate = () => {
+
+  const handleRotate = useCallback(() => {
     setRotate(!rotate);
-  }
+  },[rotate]);
   
   
 

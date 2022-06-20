@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment,useCallback } from "react";
 import React from "react";
 import ReactDom from "react-dom";
 import ImageSlider from "./ImageSlider";
