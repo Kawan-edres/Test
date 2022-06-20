@@ -29,7 +29,7 @@ const useAudio = () => {
 const Player =  ({ url }) => {
 
   console.log("sound");
-  const [playing, toggle,setPlaying] = useAudio(url);
+  const [playing, toggle,setPlaying] = useAudio();
   const [modalHider,setModalHider]=useState(true);
   console.log("modalHider :"+modalHider);
 
